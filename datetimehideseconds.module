@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\datetime\Plugin\Field\FieldWidget\DateTimeWidgetBase;
+
 /**
  * Implements hook_element_info_alter().
  */
@@ -45,7 +47,7 @@ function datetimehideseconds_field_widget_form_alter(&$element, \Drupal\Core\For
  */
 function datetimehideseconds_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $widget, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $element = [];
-  if (isDateWidgetWithTime($widget)) {
+  if ($widget instanceof DateTimeWidgetBase) {
     // @todo Provide a schema.
     $element['hide'] = [
       '#type' => 'checkbox',
@@ -63,7 +65,7 @@ function datetimehideseconds_field_widget_third_party_settings_form(\Drupal\Core
 function datetimehideseconds_field_widget_settings_summary_alter(&$summary, $context) {
   /** @var \Drupal\Core\Field\WidgetInterface $widget */
   $widget = $context['widget'];
-  if (isDateWidgetWithTime($widget)) {
+  if ($widget instanceof DateTimeWidgetBase) {
     if ($widget->getThirdPartySetting('datetimehideseconds', 'hide')) {
       $summary[] = t('Hide seconds.');
     }
@@ -72,15 +74,3 @@ function datetimehideseconds_field_widget_settings_summary_alter(&$summary, $con
     }
   }
 }
-
-/**
- * @param \Drupal\Core\Field\WidgetInterface $widget
- * @return bool
- */
-function isDateWidgetWithTime(\Drupal\Core\Field\WidgetInterface $widget) {
-  if ($widget instanceof \Drupal\datetime\Plugin\Field\FieldWidget\DateTimeWidgetBase) {
-    return TRUE;
-  }
-  return FALSE;
-}
-
