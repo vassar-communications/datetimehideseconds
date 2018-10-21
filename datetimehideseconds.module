@@ -39,6 +39,9 @@ function datetimehideseconds_field_widget_form_alter(&$element, \Drupal\Core\For
   $widget = $context['widget'];
   if ($widget->getThirdPartySetting('datetimehideseconds', 'hide')) {
     $element['value']['#datetimehideseconds']['hide'] = TRUE;
+    if (isset($element['end_value'])) {
+      $element['end_value']['#datetimehideseconds']['hide'] = TRUE;
+    }
   }
 }
 
