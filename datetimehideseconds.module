@@ -51,7 +51,6 @@ function datetimehideseconds_field_widget_form_alter(&$element, \Drupal\Core\For
 function datetimehideseconds_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $widget, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
   $element = [];
   if ($widget instanceof DateTimeWidgetBase) {
-    // @todo Provide a schema.
     $element['hide'] = [
       '#type' => 'checkbox',
       '#title' => t('Hide seconds'),
