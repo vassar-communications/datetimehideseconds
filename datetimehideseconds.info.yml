@@ -1,4 +1,4 @@
-name: DateTime hide Seconds
+name: DateTime Hide Seconds
 type: module
 description: Provides the option to hide seconds in datetime fields.
 core: 8.x
