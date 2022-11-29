@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\datetime\Plugin\Field\FieldWidget\DateTimeWidgetBase;
 
 /**
@@ -34,7 +37,7 @@ function datetimehideseconds_process_element($element) {
 /**
  * Implements hook_field_widget_form_alter().
  */
-function datetimehideseconds_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+function datetimehideseconds_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
   /** @var \Drupal\Core\Field\WidgetInterface $widget */
   $widget = $context['widget'];
   if ($widget->getThirdPartySetting('datetimehideseconds', 'hide')) {
@@ -48,7 +51,7 @@ function datetimehideseconds_field_widget_form_alter(&$element, \Drupal\Core\For
 /**
  * Implements hook_field_widget_third_party_settings_form().
  */
-function datetimehideseconds_field_widget_third_party_settings_form(\Drupal\Core\Field\WidgetInterface $widget, \Drupal\Core\Field\FieldDefinitionInterface $field_definition, $form_mode, $form, \Drupal\Core\Form\FormStateInterface $form_state) {
+function datetimehideseconds_field_widget_third_party_settings_form(WidgetInterface $widget, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
   $element = [];
   if ($widget instanceof DateTimeWidgetBase) {
     $element['hide'] = [
