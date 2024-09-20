@@ -1,8 +1,13 @@
 <?php
 
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Field\WidgetInterface;
+/**
+ * @file
+ * Hook implementations for the datetimehideseconds module.
+ */
+
 use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\WidgetInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\datetime\Plugin\Field\FieldWidget\DateTimeWidgetBase;
 
 /**
