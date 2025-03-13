@@ -5,6 +5,7 @@
  * Hook implementations for the datetimehideseconds module.
  */
 
+use Drupal\Core\Datetime\Plugin\Field\FieldWidget\TimestampDatetimeWidget;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\WidgetInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -58,7 +59,7 @@ function datetimehideseconds_field_widget_single_element_form_alter(&$element, F
  */
 function datetimehideseconds_field_widget_third_party_settings_form(WidgetInterface $widget, FieldDefinitionInterface $field_definition, $form_mode, $form, FormStateInterface $form_state) {
   $element = [];
-  if ($widget instanceof DateTimeWidgetBase) {
+  if ($widget instanceof DateTimeWidgetBase || $widget instanceof TimestampDatetimeWidget) {
     $element['hide'] = [
       '#type' => 'checkbox',
       '#title' => t('Hide seconds'),
@@ -75,7 +76,7 @@ function datetimehideseconds_field_widget_third_party_settings_form(WidgetInterf
 function datetimehideseconds_field_widget_settings_summary_alter(&$summary, $context) {
   /** @var \Drupal\Core\Field\WidgetInterface $widget */
   $widget = $context['widget'];
-  if ($widget instanceof DateTimeWidgetBase) {
+  if ($widget instanceof DateTimeWidgetBase || $widget instanceof TimestampDatetimeWidget) {
     if ($widget->getThirdPartySetting('datetimehideseconds', 'hide')) {
       $summary[] = t('Hide seconds.');
     }
